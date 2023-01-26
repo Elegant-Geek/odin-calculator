@@ -12,6 +12,10 @@ function multiplyNumbers(num1, num2) {
 
 }
 function divideNumbers(num1, num2) {
+    if (num2 === 0) {
+        console.log('Cannot divide by 0.')
+        return num1;
+    }
     return (num1 / num2);
 
 }
@@ -24,4 +28,4 @@ console.log(subtractNumbers(2,2));
 // returns 4
 console.log(multiplyNumbers(2,2));
 // returns 1
-console.log(divideNumbers(2,2));
+console.log(divideNumbers(2,0));
