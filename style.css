@@ -66,4 +66,67 @@ div.main-container {
     flex-wrap: wrap-reverse;
 }
 
+.calculator-body {
+    background-color: #4C5163;
+    height: 480px;
+    width: 425px;
+    border-radius: 20px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calculator-display {
+    display: flex;
+    /* right aligning any inputted numbers in the calc display*/
+    justify-content: flex-end;
+    /* this padding below controls how far from right edge the numbers in display are*/
+    padding: 0px 25px;
+    align-items: center;
+    width: 400px;
+    height: 100px;
+    background-color: #f2d17c;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 15px 0px;
+}
+.calculator-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px 15px;
+}
+
+.function-button, .number-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 94px;
+    height: 62px;
+    border-radius: 10px;
+    background-color: #f2d17c;
+}
+.function-button {
+    background-color: beige;
+}
+.calculator-buttons-left {
+    display: flex;
+    flex: 3 0 0; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.calculator-buttons-right {
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+}
+.plus-button {
+    height: 129px;
+}
 
