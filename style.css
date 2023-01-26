@@ -1,0 +1,69 @@
+/* The body has a default margin. Remove it via: */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #B2BEEB;
+}
+
+/* ALL DIVS GIVEN BORDER-BOX to avoid redundancy in code and to make formatting consistent when adding padding! */
+div {
+  box-sizing: border-box;
+}
+
+/* remove link underline */
+.footer a {
+    text-decoration: none;
+    color: #A7B2EB;
+}
+
+.mini-grid-square {
+    /* width: 31.25px;
+    height: 31.25px; */
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.header, .footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #4C5163;
+}
+
+.header {
+    padding: 0rem 4rem;
+    justify-content: center;
+}
+
+.header  h1 {
+    margin: 5px;
+    color: white;
+}
+
+.footer {
+    padding: 1rem 4rem;
+    justify-content: space-between;
+    color: white;
+}
+
+.social-media-container {
+    display: flex;
+    gap: 15px;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+div.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0rem;
+    height: auto;
+    flex-wrap: wrap-reverse;
+}
+
+
