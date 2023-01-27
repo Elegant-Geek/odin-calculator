@@ -67,9 +67,9 @@ div.main-container {
 }
 
 .calculator-body {
-    background-color: #4C5163;
-    height: 480px;
-    width: 299px;
+    background-color: #000000;
+    height: 485px;
+    width: 300px;
     border-radius: 20px;
     border: 1px solid black;
     display: flex;
@@ -86,10 +86,12 @@ div.main-container {
     align-items: center;
     width: 264px;
     height: 100px;
-    background-color: #f2d17c;
+    background-color: #313131;
     border: 1px solid black;
     border-radius: 10px;
     margin: 15px 0px;
+    color: white;
+    font-size: 40px;
 }
 .calculator-buttons {
     display: flex;
@@ -99,34 +101,43 @@ div.main-container {
     padding: 0px 15px;
 }
 
-.function-button, .number-button {
+.function-button, .number-button, .misc-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 63px;
-    height: 63px;
-    border-radius: 10px;
-    background-color: #f2d17c;
+    width: 60px;
+    height: 60px;
+    /* FIX THIS ONE */
+    border-radius: 30px;
+    background-color: #313131;
+    font-size: 25px;
+    color: white;
 }
 .function-button {
-    background-color: beige;
+    background-color: #f69906;
+}
+.misc-button {
+    background-color: #9f9f9f;
 }
 .calculator-buttons-left {
     display: flex;
     flex: 3 0 0; 
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 9px;
 }
 
 .calculator-buttons-right {
     display: flex;
     flex: 1 0 0;
     flex-direction: column;
-    gap: 5px;
+    gap: 9px;
     align-items: flex-end;
 }
-.plus-button {
-    height: 131px;
+.zero-button {
+    width: 131px;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 30px;
 }
 
