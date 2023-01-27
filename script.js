@@ -8,6 +8,7 @@ const displayParent = document.querySelector('.calculator-display');
 const displayPara = document.createElement('p');
 displayPara.innerHTML = "TESTTT";
 displayParent.appendChild(displayPara);
+// grab all number buttons
 const numberButtons = document.querySelectorAll('.number-button');
 
 function addNumbers(num1, num2) {
