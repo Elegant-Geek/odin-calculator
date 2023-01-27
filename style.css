@@ -110,7 +110,7 @@ div.main-container {
     /* FIX THIS ONE */
     border-radius: 30px;
     background-color: #313131;
-    font-size: 25px;
+    font-size: 30px;
     color: white;
 }
 .function-button {
@@ -138,6 +138,6 @@ div.main-container {
     width: 131px;
     display: flex;
     justify-content: flex-start;
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
