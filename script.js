@@ -1,6 +1,14 @@
 // welcome to the js file
 let num1;
 let num2;
+let operator;
+
+const displayParent = document.querySelector('.calculator-display');
+// create new dom element p tag thing that gets created by default set to zero
+const displayPara = document.createElement('p');
+displayPara.innerHTML = "TESTTT";
+displayParent.appendChild(displayPara);
+const numberButtons = document.querySelectorAll('.number-button');
 
 function addNumbers(num1, num2) {
     return (num1 + num2);
@@ -56,6 +64,10 @@ function operate(num1, operator, num2) {
     else {console.log('something is wrong')}
 }
 
+function display() {
+    // if number is pressed display it if it is not a number (like an operator, dont update display)
+    
+}
 // test the six basic operator functions
 // addNumbers returns 4
 console.log(addNumbers(2,2));
