@@ -4,7 +4,6 @@ let num2;
 let operator;
 let runningList = [0];
 let displayValue = 0;
-
 const displayParent = document.querySelector('.calculator-display');
 // create new dom element p tag thing that gets created by default set to zero
 const displayPara = document.createElement('p');
@@ -35,6 +34,15 @@ function clearDisplay() {
     console.log("Display cleared!");
 }
 function updateDisplay() {
+    // TWO KEY CHANGES TO UPDATE DISPLAY
+    // STEP ONE: overwrite the current array input so that all FLOATING zeroes get removed.
+    runningList = String(displayValue).split("").map((displayValue)=>{
+        return (displayValue);
+        }) 
+    // STEP TWO: this line helps clear floating zeroes by using parseint and 10 https://stackoverflow.com/questions/6676488/remove-leading-zeros-from-a-number-in-javascript
+        // displayValue = parseFloat(displayValue, 10);
+        //removed this line for now. play around with this input. 1.28.23
+
     console.log(runningList);
     console.log(displayValue);
     displayPara.textContent = `${displayValue}`;
@@ -65,8 +73,7 @@ function displayNumber() {
         runningList.shift();
         runningList.push(numberButtonInput);
         displayValue = (runningList.join(''));
-        // note the lack of number conversion when decimal point is entered for the first array entry
-        displayPara.textContent = `${displayValue}`; 
+        updateDisplay();
         return;
     }
     // if any instance more than one decimal exists, get out of the function.
@@ -76,10 +83,9 @@ function displayNumber() {
         return;
     }
     else {
+
     runningList.push(numberButtonInput);
     displayValue = (runningList.join(''));
-    console.log(runningList);
-
     updateDisplay();    
     }
 
