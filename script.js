@@ -26,6 +26,8 @@ for (let i = 0 ; i < numberButtons.length; i++) {
  }
 
 function updateDisplay() {
+    console.log(runningList);
+    console.log(displayValue);
     displayPara.textContent = `${displayValue}`;
     // update display value with a numerical conversion type AFTER the display is updated so that decimal points are rendered. 
     // If the display was updated with the Number() acting on the displayvalue before printing, the decimal gets ignored by the Number() function (view becomes inaccurate.)
@@ -42,6 +44,7 @@ function displayNumber() {
     // NOTE: this check is done first because the other checks below activate pushes which adds one more valid value to the array.
     // NOTE: this value is 9 instead of 10 because the pushing of an array element happens AFTER this check and spans over different conditionals. Less complex to put this single check up here.
     if (runningList.length > 9) {
+        console.log("ERROR: no room to add more numbers.");
         return;
        }
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
@@ -61,6 +64,8 @@ function displayNumber() {
     else {
     runningList.push(numberButtonInput);
     displayValue = (runningList.join(''));
+    console.log(runningList);
+
     updateDisplay();    
     }
 
@@ -90,22 +95,48 @@ function divideNumbers(num1, num2) {
 
 function plusMinus() {
     if (runningList[0] === '-') {
-        //remove - in front if it exists (button toggles)
+        //if there is a '-' in front, remove it (this acts like a button toggle)
         runningList.shift();
     }
-    else {
-        // if - does not exist, add the '-' to front of array
+    else if ((runningList.length <= 9) && (runningList[0] !== '-')) {
+        // if array is less than or equal to 9 in length and there is not a '-' in front already, add one.
         runningList.unshift('-');
     }
+// this gets displayed if the function is called but there is not enough space for the - sign. 
+    else {
+        console.log("ERROR: no room to add a -");
+        console.log(`${runningList.length} characters are already displayed`);
+    }
+
     displayValue = (runningList.join(''));
     // displayValue = (displayValue * -1);
     updateDisplay();
+
+
 }
 
 function asPercentage() {
-    displayValue = (displayValue / 100);
-    updateDisplay();
-}
+    // you cannot use the percentage button if array is 9+ characters including decimal or if array is 9+ characters including an existing '-' sign and decimals. 
+    if (runningList.length > 10) {
+        return;
+       }
+    //update displayvalue and then the running list with the newly calculated value
+    displayValue = parseFloat(displayValue / 100);
+    runningList = String(displayValue).split("").map((displayValue)=>{
+        return (displayValue);
+        }) 
+   
+        if (runningList.length > 9) {
+            console.log(`ERROR: length is too long (${runningList.length}) digits.`);
+            displayValue = parseFloat(displayValue / 100).toFixed(4);
+            // SOURCE: https://www.geeksforgeeks.org/how-to-convert-a-number-into-array-in-javascript/ 
+            runningList = String(displayValue).split("").map((displayValue)=>{
+                return (displayValue);
+                })        
+        }
+        updateDisplay();
+    }
+
 
 function operate(num1, operator, num2) {
     // if number 2 is not given, either one of two functions is run: (+/- or %). (NOTE: the visual equal sign will soon be hooked up to CALL THE OPERATE FUNCTION after two numbers are input)
