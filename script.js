@@ -14,17 +14,26 @@ displayParent.appendChild(displayPara);
 const numberButtons = document.querySelectorAll('.number-button');
 // The line below only works for a single button but can't assign an event listener to each button on its own!
 // numberButtons.addEventListener("click",  displayNumber);
-const plusMinusButton = document.getElementById('plusminus');
+const plusMinusButton = document.getElementById('plus-minus');
 plusMinusButton.addEventListener('click', plusMinus); 
 const percentageButton = document.getElementById('percentage');
 percentageButton.addEventListener('click', asPercentage); 
-
+const clearButton = document.getElementById('clear-button');
+clearButton.addEventListener('click', clearDisplay); 
 
 // iterate through all number buttons to add event listener to each number button
 for (let i = 0 ; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click', displayNumber); 
  }
 
+function clearDisplay() {
+    //clears the place where the expression is stored
+    runningList = [];
+    //clears the display value that is tied to the expression
+    displayValue = 0;
+    updateDisplay();
+    console.log("Display cleared!");
+}
 function updateDisplay() {
     console.log(runningList);
     console.log(displayValue);
@@ -127,7 +136,8 @@ function asPercentage() {
    
         if (runningList.length > 9) {
             console.log(`ERROR: length is too long (${runningList.length}) digits.`);
-            displayValue = parseFloat(displayValue / 100).toFixed(4);
+            //fixed a bug where i ran the DV / 100 calculation twice here
+            displayValue = displayValue.toFixed(4);
             // SOURCE: https://www.geeksforgeeks.org/how-to-convert-a-number-into-array-in-javascript/ 
             runningList = String(displayValue).split("").map((displayValue)=>{
                 return (displayValue);
