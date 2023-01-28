@@ -13,18 +13,19 @@ const numberButtons = document.querySelectorAll('.number-button');
 // The line below only works for a single button but can't assign an event listener to each button on its own!
 // numberButtons.addEventListener("click",  displayNumber);
 
+
+
 // iterate through all number buttons to add event listener to each number button
 for (let i = 0 ; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click' , displayNumber); 
+    let temp = numberButtons[i].textContent;
+    console.log(temp);
  }
 
 function displayNumber() {
-    // Update with correct user value from the slider!
-    // if (typeof value === 'number') {
-    //     num1 = value;
-    // }
-        displayPara.innerHTML = '';
-    displayPara.innerHTML = "hello";
+    // display the text content of each numberButtons[i]
+    // console.log(`${this.textContent}`);
+    displayPara.textContent = `${this.textContent}`;
 }
 
 function addNumbers(num1, num2) {
