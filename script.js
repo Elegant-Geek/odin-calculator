@@ -13,14 +13,11 @@ const numberButtons = document.querySelectorAll('.number-button');
 // The line below only works for a single button but can't assign an event listener to each button on its own!
 // numberButtons.addEventListener("click",  displayNumber);
 
-
-
 // iterate through all number buttons to add event listener to each number button
 for (let i = 0 ; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click' , displayNumber); 
  }
 
- 
 let runningList = [];
 let displayValue = 0;
 function displayNumber() {
@@ -28,13 +25,42 @@ function displayNumber() {
     // console.log(`${this.textContent}`);
     // assign the current place in the array
     let numberButtonInput = this.textContent;
-    runningList.push(numberButtonInput);
     // stop the array from accumulating more than 10 digits upon any further button press!
-    if (runningList.length > 10) {
+    // NOTE: this check is done first because the other checks below activate pushes which adds one more valid value to the array.
+    // NOTE: this value is 9 instead of 10 because the pushing of an array element happens AFTER this check and spans over different conditionals. Less complex to put this single check up here.
+    if (runningList.length > 9) {
         return;
        }
-    displayValue = Number(runningList.join(''));
+    // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
+    if (runningList[0] === '.' && runningList.length === 1) {
+        runningList.push(numberButtonInput);
+        displayValue = (runningList.join(''));
+        // note the lack of number conversion when decimal point is entered for the first array entry
+        displayPara.textContent = `${displayValue}`; 
+        return;
+    }
+    // if any instance more than one decimal exists, get out of the function.
+    // if there is a sinlge instance of the decimal in the array already and the current input for onclick that triggers displayButton is '.' then DO NOT add it! Escape the function.
+    if ((runningList.filter(x => x === '.').length === 1 && this.textContent === '.')) {
+        console.log('CANNOT ADD MORE THAN ONE DECIMAL POINT TO NUMBER');
+        return;
+    }
+    else {
+    runningList.push(numberButtonInput);
+    displayValue = (runningList.join(''));
     displayPara.textContent = `${displayValue}`;
+    // update display value with a numerical conversion type AFTER the display is updated so that decimal points are rendered. 
+    // If the display was updated with the Number() acting on the displayvalue before printing, the decimal gets ignored by the Number() function (view becomes inaccurate.)
+    // "78." becomes 78 when converted to number format below.
+    displayValue = Number(displayValue);
+    }
+
+
+    // if (runningList.filter(x => x === '.').length = 1) {
+    //     return;
+    // }
+
+
 
     // verify the display value is a number every time the value is updated by running this display number function:
     // console.log(typeof displayValue);
