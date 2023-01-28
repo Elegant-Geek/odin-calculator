@@ -112,6 +112,7 @@ div.main-container {
     background-color: #313131;
     font-size: 30px;
     color: white;
+    cursor: pointer;
 }
 .function-button {
     background-color: #f69906;

@@ -6,10 +6,26 @@ let operator;
 const displayParent = document.querySelector('.calculator-display');
 // create new dom element p tag thing that gets created by default set to zero
 const displayPara = document.createElement('p');
-displayPara.innerHTML = "TESTTT";
+// displayPara.innerHTML = "TESTTT";
 displayParent.appendChild(displayPara);
 // grab all number buttons
 const numberButtons = document.querySelectorAll('.number-button');
+// The line below only works for a single button but can't assign an event listener to each button on its own!
+// numberButtons.addEventListener("click",  displayNumber);
+
+// iterate through all number buttons to add event listener to each number button
+for (let i = 0 ; i < numberButtons.length; i++) {
+    numberButtons[i].addEventListener('click' , displayNumber); 
+ }
+
+function displayNumber() {
+    // Update with correct user value from the slider!
+    // if (typeof value === 'number') {
+    //     num1 = value;
+    // }
+        displayPara.innerHTML = '';
+    displayPara.innerHTML = "hello";
+}
 
 function addNumbers(num1, num2) {
     return (num1 + num2);
