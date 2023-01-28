@@ -42,9 +42,11 @@ function displayNumber() {
     let numberButtonInput = this.textContent;
     // stop the array from accumulating more than 10 digits upon any further button press!
     // NOTE: this check is done first because the other checks below activate pushes which adds one more valid value to the array.
-    // NOTE: this value is 9 instead of 10 because the pushing of an array element happens AFTER this check and spans over different conditionals. Less complex to put this single check up here.
-    if (runningList.length > 9) {
-        console.log("ERROR: no room to add more numbers.");
+    // NOTE: this value is 9 instead of 10 because the pushing of an array element happens AFTER this check (adds one more element) and spans over different conditionals.
+    // https://www.w3schools.com/jsref/jsref_indexof.asp
+    // ^^^^ The runningList.indexOf("e") !== -1 checks if any match is present by using indexOf("e"). -1 is returned if check is false. Therefore, !== -1 means a match to "e" was found.
+    if (runningList.length > 9 || runningList.indexOf("e") !== -1) {
+        console.log("ERROR: no room to add more numbers, or 'E notation' expression is present.");
         return;
        }
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
@@ -73,7 +75,7 @@ function displayNumber() {
     // verify the display value is a number every time the value is updated by running this display number function:
     // console.log(typeof displayValue);
 }
-
+// ------------------------------------------------- THESE FOUR FUNCTIONS WILL BE MODIFIED SOON -------------------------------------------------
 function addNumbers(num1, num2) {
     return (num1 + num2);
 }
@@ -107,12 +109,9 @@ function plusMinus() {
         console.log("ERROR: no room to add a -");
         console.log(`${runningList.length} characters are already displayed`);
     }
-
     displayValue = (runningList.join(''));
     // displayValue = (displayValue * -1);
     updateDisplay();
-
-
 }
 
 function asPercentage() {
@@ -165,8 +164,7 @@ function operate(num1, operator, num2) {
     else {console.log('something is wrong')}
 }
 
-
-// test the six basic operator functions
+// test the six basic operator functions (no longer work because a aspercentage and plusminus functions depend on the running list (related to currentdisplay) rather than user input)
 // addNumbers returns 4
 // console.log(addNumbers(2,2));
 // // subtractNumbers returns 0
