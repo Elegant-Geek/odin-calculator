@@ -2,11 +2,13 @@
 let num1;
 let num2;
 let operator;
+let runningList = [];
+let displayValue = 0;
 
 const displayParent = document.querySelector('.calculator-display');
 // create new dom element p tag thing that gets created by default set to zero
 const displayPara = document.createElement('p');
-// displayPara.innerHTML = "TESTTT";
+displayPara.innerHTML = `${displayValue}`;
 displayParent.appendChild(displayPara);
 // grab all number buttons
 const numberButtons = document.querySelectorAll('.number-button');
@@ -18,8 +20,7 @@ for (let i = 0 ; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click' , displayNumber); 
  }
 
-let runningList = [];
-let displayValue = 0;
+
 function displayNumber() {
     // display the text content of each numberButtons[i]
     // console.log(`${this.textContent}`);
@@ -40,7 +41,7 @@ function displayNumber() {
         return;
     }
     // if any instance more than one decimal exists, get out of the function.
-    // if there is a sinlge instance of the decimal in the array already and the current input for onclick that triggers displayButton is '.' then DO NOT add it! Escape the function.
+    // if there is a single instance of the decimal in the array already and the current input for onclick that triggers displayButton is '.' then DO NOT add it! Escape the function.
     if ((runningList.filter(x => x === '.').length === 1 && this.textContent === '.')) {
         console.log('CANNOT ADD MORE THAN ONE DECIMAL POINT TO NUMBER');
         return;
