@@ -77,6 +77,14 @@ function displayNumber() {
         updateDisplay();
         return;
     }
+    // if the clear all button is run, the length of the array is empty. If a decimal place is the input and the array is completely empty, push a leading 0 then the '.' dot.
+    else if ((numberButtonInput === '.') && (runningList.length === 0)) {
+        runningList.push('0');
+        runningList.push(numberButtonInput);
+        displayValue = (runningList.join(''));
+        updateDisplay();
+        return;
+    }
     // if any instance more than one decimal exists, get out of the function.
     // if there is a single instance of the decimal in the array already and the current input for onclick that triggers displayButton is '.' then DO NOT add it! Escape the function.
     if ((runningList.filter(x => x === '.').length === 1 && this.textContent === '.')) {
