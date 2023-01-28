@@ -18,14 +18,26 @@ const numberButtons = document.querySelectorAll('.number-button');
 // iterate through all number buttons to add event listener to each number button
 for (let i = 0 ; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click' , displayNumber); 
-    let temp = numberButtons[i].textContent;
-    console.log(temp);
  }
 
+ 
+let runningList = [];
+let displayValue = 0;
 function displayNumber() {
     // display the text content of each numberButtons[i]
     // console.log(`${this.textContent}`);
-    displayPara.textContent = `${this.textContent}`;
+    // assign the current place in the array
+    let numberButtonInput = this.textContent;
+    runningList.push(numberButtonInput);
+    // stop the array from accumulating more than 10 digits upon any further button press!
+    if (runningList.length > 10) {
+        return;
+       }
+    displayValue = Number(runningList.join(''));
+    displayPara.textContent = `${displayValue}`;
+
+    // verify the display value is a number every time the value is updated by running this display number function:
+    // console.log(typeof displayValue);
 }
 
 function addNumbers(num1, num2) {
