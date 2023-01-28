@@ -2,7 +2,7 @@
 let num1;
 let num2;
 let operator;
-let runningList = [0];
+let runningList = [];
 let displayValue = 0;
 const displayParent = document.querySelector('.calculator-display');
 // create new dom element p tag thing that gets created by default set to zero
@@ -68,10 +68,9 @@ function displayNumber() {
        }
 
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
-    if ((numberButtonInput !== '.') && (runningList[0] === 0 && runningList.length === 1)) {
+    if ((numberButtonInput !== '.') && (runningList.length === 1)) {
         // if the first thing typed in is NOT a decimal, and the current display has 0, and 0 is the first and... 
         // only element in the array, remove the zero and replace it with the first number input that gets typed in.
-        runningList.shift();
         runningList.push(numberButtonInput);
         displayValue = (runningList.join(''));
         updateDisplay();
