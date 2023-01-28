@@ -40,7 +40,7 @@ function updateDisplay() {
         return (displayValue);
         }) 
     // STEP TWO: this line helps clear floating zeroes by using parseint and 10 https://stackoverflow.com/questions/6676488/remove-leading-zeros-from-a-number-in-javascript
-        // displayValue = parseFloat(displayValue, 10);
+        displayValue = parseFloat(displayValue, 10);
         //removed this line for now. play around with this input. 1.28.23
 
     console.log(runningList);
