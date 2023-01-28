@@ -14,13 +14,25 @@ displayParent.appendChild(displayPara);
 const numberButtons = document.querySelectorAll('.number-button');
 // The line below only works for a single button but can't assign an event listener to each button on its own!
 // numberButtons.addEventListener("click",  displayNumber);
+const plusMinusButton = document.getElementById('plusminus');
+plusMinusButton.addEventListener('click', plusMinus); 
+const percentageButton = document.getElementById('percentage');
+percentageButton.addEventListener('click', asPercentage); 
+
 
 // iterate through all number buttons to add event listener to each number button
 for (let i = 0 ; i < numberButtons.length; i++) {
-    numberButtons[i].addEventListener('click' , displayNumber); 
+    numberButtons[i].addEventListener('click', displayNumber); 
  }
 
+function updateDisplay() {
+    displayPara.textContent = `${displayValue}`;
+    // update display value with a numerical conversion type AFTER the display is updated so that decimal points are rendered. 
+    // If the display was updated with the Number() acting on the displayvalue before printing, the decimal gets ignored by the Number() function (view becomes inaccurate.)
+    // "78." becomes 78 when converted to number format below.
+    displayValue = Number(displayValue);
 
+}
 function displayNumber() {
     // display the text content of each numberButtons[i]
     // console.log(`${this.textContent}`);
@@ -49,18 +61,8 @@ function displayNumber() {
     else {
     runningList.push(numberButtonInput);
     displayValue = (runningList.join(''));
-    displayPara.textContent = `${displayValue}`;
-    // update display value with a numerical conversion type AFTER the display is updated so that decimal points are rendered. 
-    // If the display was updated with the Number() acting on the displayvalue before printing, the decimal gets ignored by the Number() function (view becomes inaccurate.)
-    // "78." becomes 78 when converted to number format below.
-    displayValue = Number(displayValue);
+    updateDisplay();    
     }
-
-
-    // if (runningList.filter(x => x === '.').length = 1) {
-    //     return;
-    // }
-
 
 
     // verify the display value is a number every time the value is updated by running this display number function:
@@ -86,12 +88,23 @@ function divideNumbers(num1, num2) {
     return (num1 / num2);
 }
 
-function plusMinus(num1) {
-    return (num1 * -1);
+function plusMinus() {
+    if (runningList[0] === '-') {
+        //remove - in front if it exists (button toggles)
+        runningList.shift();
+    }
+    else {
+        // if - does not exist, add the '-' to front of array
+        runningList.unshift('-');
+    }
+    displayValue = (runningList.join(''));
+    // displayValue = (displayValue * -1);
+    updateDisplay();
 }
 
-function asPercentage(num1) {
-    return (num1 / 100);
+function asPercentage() {
+    displayValue = (displayValue / 100);
+    updateDisplay();
 }
 
 function operate(num1, operator, num2) {
@@ -121,35 +134,32 @@ function operate(num1, operator, num2) {
     else {console.log('something is wrong')}
 }
 
-function display() {
-    // if number is pressed display it if it is not a number (like an operator, dont update display)
-    
-}
+
 // test the six basic operator functions
 // addNumbers returns 4
-console.log(addNumbers(2,2));
-// subtractNumbers returns 0
-console.log(subtractNumbers(2,2));
-// multiplyNumbers returns 4
-console.log(multiplyNumbers(2,2));
-// divideNumbers returns 1
-console.log(divideNumbers(2,0));
-// plusMinus returns -2
-console.log(plusMinus(2));
-// asPercentage returns 0.02
-console.log(asPercentage(2));
+// console.log(addNumbers(2,2));
+// // subtractNumbers returns 0
+// console.log(subtractNumbers(2,2));
+// // multiplyNumbers returns 4
+// console.log(multiplyNumbers(2,2));
+// // divideNumbers returns 1
+// console.log(divideNumbers(2,0));
+// // plusMinus returns -2
+// console.log(plusMinus(2));
+// // asPercentage returns 0.02
+// console.log(asPercentage(2));
 
-//testing the operate function (6 tests)
-console.log('TESTING THE OPERATE FUNCTION (6 mini-functions inside)')
-// returns 4
-console.log(operate(2, '+', 2));
-// returns 0
-console.log(operate(2, '-', 2));
-// returns 4
-console.log(operate(2, '*', 2));
-// returns 1
-console.log(operate(2, '/', 2));
-// returns -2
-console.log(operate(2, '+/-'));
-// returns 0.02
-console.log(operate(2, '%'));
+// //testing the operate function (6 tests)
+// console.log('TESTING THE OPERATE FUNCTION (6 mini-functions inside)')
+// // returns 4
+// console.log(operate(2, '+', 2));
+// // returns 0
+// console.log(operate(2, '-', 2));
+// // returns 4
+// console.log(operate(2, '*', 2));
+// // returns 1
+// console.log(operate(2, '/', 2));
+// // returns -2
+// console.log(operate(2, '+/-'));
+// // returns 0.02
+// console.log(operate(2, '%'));
