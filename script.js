@@ -27,22 +27,13 @@ for (let i = 0 ; i < numberButtons.length; i++) {
 
 function clearDisplay() {
     //clears the place where the expression is stored
-    runningList = [0];
+    runningList = [];
     //clears the display value that is tied to the expression
     displayValue = 0;
     updateDisplay();
     console.log("Display cleared!");
 }
 function updateDisplay() {
-    // TWO KEY CHANGES TO UPDATE DISPLAY
-    // STEP ONE: overwrite the current array input so that all FLOATING zeroes get removed.
-    runningList = String(displayValue).split("").map((displayValue)=>{
-        return (displayValue);
-        }) 
-    // STEP TWO: this line helps clear floating zeroes by using parseint and 10 https://stackoverflow.com/questions/6676488/remove-leading-zeros-from-a-number-in-javascript
-        displayValue = parseFloat(displayValue, 10);
-        //removed this line for now. play around with this input. 1.28.23
-
     console.log(runningList);
     console.log(displayValue);
     displayPara.textContent = `${displayValue}`;
@@ -66,6 +57,16 @@ function displayNumber() {
         console.log("ERROR: no room to add more numbers, or 'E notation' expression is present.");
         return;
        }
+
+       let sumofDigits = runningList.map(function(str) {
+        // using map() to convert array of strings to numbers: https://bit.ly/3wDnX5U
+        return parseInt(str); });
+        // if everything in the array adds up to 0 and the current input is 0, get out of the function!
+       if ((sumofDigits.reduce((a, b) => a + b, 0) === 0) && (numberButtonInput === '0')) {
+        console.log('leading zero removed');
+        return;
+       }
+
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
     if ((numberButtonInput !== '.') && (runningList[0] === 0 && runningList.length === 1)) {
         // if the first thing typed in is NOT a decimal, and the current display has 0, and 0 is the first and... 
