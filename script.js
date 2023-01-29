@@ -77,6 +77,10 @@ function displayNumber() {
         return;
        }
 
+       if ((runningList[0] === '-') && (runningList[1] === '0')) {
+        runningList.pop();
+       }
+
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
     if ((numberButtonInput !== '.') && (runningList.length === 1)) {
         // if the first thing typed in is NOT a decimal, and the current display has 0, and 0 is the first and... 
@@ -141,6 +145,17 @@ function plusMinus() {
         runningList = String(displayValue).split("").map((displayValue)=>{
             return (displayValue);
             }) 
+            // After updating with a value of 0 if % function is run on an array with nothing in it and just ['0'] is returned...
+// Into the array from the split("").map above, and if that resulting ['0'] is the only thing sitting in the array, 
+// Remove it from the array (.shift();) which leaves the array clear for any following number input. 
+// If this conditional is removed, the floating 0 in front is retained from the array and shown in display. BAD! (Again it only runs when runninglist is: ['0'] after % is run.)
+        if (runningList[0] === '0' && runningList.length === 1) {
+            runningList = ['-', '0'];
+        }
+        else if ((runningList[0] === '-') && (runningList[1] === '0')) {
+            runningList.shift();
+            displayValue = 0;
+        }
     }
 // this gets displayed if the function is called but there is not enough space for the - sign. 
     else {
