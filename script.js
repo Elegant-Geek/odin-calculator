@@ -145,11 +145,19 @@ function asPercentage() {
     if (runningList.length > 10) {
         return;
        }
+
     //update displayvalue and then the running list with the newly calculated value
     displayValue = parseFloat(displayValue / 100);
     runningList = String(displayValue).split("").map((displayValue)=>{
         return (displayValue);
         }) 
+// After updating with a value of 0 if % function is run on an array with nothing in it and just ['0'] is returned...
+// Into the array from the split("").map above, and if that resulting ['0'] is the only thing sitting in the array, 
+// Remove it from the array (.shift();) which leaves the array clear for any following number input. 
+// If this conditional is removed, the floating 0 in front is retained from the array and shown in display. BAD! (Again it only runs when runninglist is: ['0'] after % is run.)
+        if (runningList[0] === '0' && runningList.length === 1) {
+            runningList.shift();
+        }
    
         if (runningList.length > 9) {
             console.log(`ERROR: length is too long (${runningList.length}) digits.`);

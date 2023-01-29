@@ -107,18 +107,29 @@ div.main-container {
     align-items: center;
     width: 60px;
     height: 60px;
-    /* FIX THIS ONE */
     border-radius: 30px;
-    background-color: #313131;
     font-size: 30px;
     color: white;
     cursor: pointer;
 }
+.number-button {
+    background-color: #333333;
+}
+.number-button:active {
+    background-color: #737373;
+}
 .function-button {
-    background-color: #f69906;
+    background-color: #ff9501;
+}
+.function-button:active {
+    background-color: #fac88d;
 }
 .misc-button {
-    background-color: #9f9f9f;
+    background-color: #a6a6a6;
+    color: #010101;
+}
+.misc-button:active {
+    background-color: #d9d9d9;
 }
 .calculator-buttons-left {
     display: flex;
