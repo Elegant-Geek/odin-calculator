@@ -224,7 +224,7 @@ function asPercentage() {
             displayValue = divideNumbers(num1, num2);
         }
         else {
-            console.log('something is wrong, equals sign is being used')
+            console.log('equals sign is being used')
             console.log(`num1 is ${num1} operator is ${operator} num2 is ${num2}`)
     }
     }
@@ -238,6 +238,8 @@ function mathFunctionSelect() {
 
     if (num1 && !num2) {
         runningList = [];
+
+
         num2 = displayValue;
         console.log(`num 2 is ${num2}`);
         console.log(`expression is ${num1} ${operatorSymbol} ${num2}`);
@@ -247,13 +249,19 @@ function mathFunctionSelect() {
     else if (!num2) {
         operator = operatorTemp;
         console.log(`${operator} is selected.`);
+        //this code below fixes the (89 = + 1 = 891 glitch and returns 90)
+        if (operatorTemp === 'equals') {
+            console.log('spit out return num1');
+            return;
+        }
 
             //grab display value store it as num1
     num1 = displayValue;
-    num2 = 0;
+    num2 = false;
+    // if display value has "false anywhere in it" then num2 = 0 otherwise displayvalue = num2
     displayValue = num2;
     console.log(`num2 DNE but num1 is ${num1}`);
-    console.log(`${num1} ${operator} TBD number 2`);
+    console.log(`${num1} ${operatorSymbol} TBD number 2`);
         //then clear the runninglist
     runningList = [];
         if (operatorTemp !== 'equals'){    
