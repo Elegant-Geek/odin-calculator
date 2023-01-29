@@ -11,6 +11,7 @@ displayPara.innerHTML = `${displayValue}`;
 displayParent.appendChild(displayPara);
 // grab all number buttons
 const numberButtons = document.querySelectorAll('.number-button');
+const functionButtons = document.querySelectorAll('.function-button');
 // The line below only works for a single button but can't assign an event listener to each button on its own!
 // numberButtons.addEventListener("click",  displayNumber);
 const plusMinusButton = document.getElementById('plus-minus');
@@ -23,6 +24,11 @@ clearButton.addEventListener('click', clearDisplay);
 // iterate through all number buttons to add event listener to each number button
 for (let i = 0 ; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click', displayNumber); 
+ }
+
+ // iterate through all function buttons to add event listener to each function button
+for (let i = 0 ; i < functionButtons.length; i++) {
+    functionButtons[i].addEventListener('click', mathFunctionSelect); 
  }
 
 function clearDisplay() {
@@ -171,32 +177,69 @@ function asPercentage() {
         updateDisplay();
     }
 
+    function operate(num1, operator, num2) {
+        // if number 2 is not given, either one of two functions is run: (+/- or %). (NOTE: the visual equal sign will soon be hooked up to CALL THE OPERATE FUNCTION after two numbers are input)
+        // if (!(num2)) {
+        //     if (operator === '+/-') {
+        //         return plusMinus(num1);
+        //         console.log('plusminus');
+        //     }
+        //     else if (operator === '%') {
+        //         return asPercentage(num1);
+        //         console.log('% that');
+        //     }
+        // }
+        if (operator === 'add') {
+           displayValue = addNumbers(num1, num2);
+        }
+        else if (operator === 'subtract') {
+            displayValue = subtractNumbers(num1, num2);
+        }
+        else if (operator === 'multiply') {
+            displayValue = multiplyNumbers(num1, num2);
+        }
+        else if (operator === 'divide') {
+            displayValue = divideNumbers(num1, num2);
+        }
+        else {console.log('something is wrong')}
+    }
+    
 
-function operate(num1, operator, num2) {
-    // if number 2 is not given, either one of two functions is run: (+/- or %). (NOTE: the visual equal sign will soon be hooked up to CALL THE OPERATE FUNCTION after two numbers are input)
-    if (!(num2)) {
-        if (operator === '+/-') {
-            return plusMinus(num1);
-            console.log('plusminus');
-        }
-        else if (operator === '%') {
-            return asPercentage(num1);
-            console.log('% that');
-        }
+// runs whenever a function button is pressed.
+function mathFunctionSelect() {
+    // Grab the id of what button gets clicked! COOL!
+    let operatorTemp = this.id;
+
+    if (num1 && !num2) {
+        num2 = displayValue;
+        console.log(`num 2 is ${num2}`);
+        console.log(`expression is ${num1} ${operator} ${num2}`);
     }
-    if (operator === '+') {
-       return addNumbers(num1, num2);
-    }
-    else if (operator === '-') {
-        return subtractNumbers(num1, num2);
-    }
-    else if (operator === '*') {
-        return multiplyNumbers(num1, num2);
-    }
-    else if (operator === '/') {
-        return divideNumbers(num1, num2);
-    }
-    else {console.log('something is wrong')}
+// if number 2 DNE at all, store current operator and store display value
+    else if (!num2) {
+        operator = operatorTemp;
+        console.log(`${operator} is selected.`);
+
+            //grab display value store it as num1
+    num1 = displayValue;
+    console.log(`num2 DNE but num1 is ${num1}`);
+    console.log(`${num1} ${operator} number 2`);
+        //then clear the runninglist
+        clearDisplay();
+        displayPara.innerHTML = `${operator}`;
+
+
+}
+if (num1 && num2) {
+    operate(num1, operator, num2);
+    num1 = displayValue;
+    num2 = '';
+    updateDisplay();
+
+}
+
+    
+
 }
 
 // test the six basic operator functions (no longer work because a aspercentage and plusminus functions depend on the running list (related to currentdisplay) rather than user input)
