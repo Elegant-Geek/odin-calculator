@@ -36,6 +36,10 @@ function clearDisplay() {
     runningList = [];
     //clears the display value that is tied to the expression
     displayValue = 0;
+    //clear num 1 num 2 and operator
+    num1 = false;
+    num2 = false;
+    operator = false;
     updateDisplay();
     console.log("Display cleared!");
 }
@@ -227,14 +231,15 @@ function mathFunctionSelect() {
     console.log(`num2 DNE but num1 is ${num1}`);
     console.log(`${num1} ${operator} number 2`);
         //then clear the runninglist
-        clearDisplay();
+    runningList = [];
+        if (operatorTemp !== 'equals'){    
         displayPara.innerHTML = `${num1} ${operatorSymbol}`;
+    }
 }
 // add and if current operator is NOT = sign then do the following below. if == sign, then all num 1 num 2 and operator must be cleared at some point
 if (num1 && num2) {
     operate(num1, operator, num2);
     console.log(`${num1} ${operatorSymbol} ${num2}`);
-
     num1 = displayValue;
     //grab current operator to evaluate the next expression
     operator = operatorTemp;
@@ -242,7 +247,6 @@ if (num1 && num2) {
     updateDisplay();
     if (operatorTemp !== 'equals'){    
         displayPara.innerHTML = `${num1} ${operatorSymbol}`;
-
     }
     console.log(`${num1} ${operatorSymbol} ${num2}`);
     console.log(runningList);
@@ -251,6 +255,7 @@ if (num1 && num2) {
     
 
 }
+
 
 // test the six basic operator functions (no longer work because a aspercentage and plusminus functions depend on the running list (related to currentdisplay) rather than user input)
 // addNumbers returns 4
