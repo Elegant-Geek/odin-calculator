@@ -239,11 +239,7 @@ function mathFunctionSelect() {
         console.log(`num 2 is ${num2}`);
         console.log(`expression is ${num1} ${operatorSymbol} ${num2}`);
     }
-    else if (num1 && !num2) {
-        runningList = [];
-        console.log(`num 2 is ${num2}`);
-        console.log(`expression is ${num1} ${operatorSymbol} ${num2}`);
-    } 
+
 // if number 2 DNE at all, store current operator and store display value
     else if (!num2) {
         operator = operatorTemp;
