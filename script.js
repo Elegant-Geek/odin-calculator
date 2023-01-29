@@ -223,7 +223,10 @@ function asPercentage() {
         else if (operator === 'divide') {
             displayValue = divideNumbers(num1, num2);
         }
-        else {console.log('something is wrong')}
+        else {
+            console.log('something is wrong, equals sign is being used')
+            console.log(`num1 is ${num1} operator is ${operator} num2 is ${num2}`)
+    }
     }
     
 
