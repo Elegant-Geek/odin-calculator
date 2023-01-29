@@ -240,6 +240,10 @@ if (num1 && num2) {
     operator = operatorTemp;
     num2 = false;
     updateDisplay();
+    if (operatorTemp !== 'equals'){    
+        displayPara.innerHTML = `${num1} ${operatorSymbol}`;
+
+    }
     console.log(`${num1} ${operatorSymbol} ${num2}`);
     console.log(runningList);
 }
