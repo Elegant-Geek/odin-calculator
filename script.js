@@ -150,7 +150,7 @@ function plusMinus() {
 // Remove it from the array (.shift();) which leaves the array clear for any following number input. 
 // If this conditional is removed, the floating 0 in front is retained from the array and shown in display. BAD! (Again it only runs when runninglist is: ['0'] after % is run.)
         if (runningList[0] === '0' && runningList.length === 1) {
-            runningList = ['-', '0'];
+            runningList.unshift('-');
         }
         else if ((runningList[0] === '-') && (runningList[1] === '0')) {
             runningList.shift();
