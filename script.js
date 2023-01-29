@@ -132,13 +132,15 @@ function divideNumbers(num1, num2) {
 }
 
 function plusMinus() {
-    if (runningList[0] === '-') {
-        //if there is a '-' in front, remove it (this acts like a button toggle)
-        runningList.shift();
-    }
-    else if ((runningList.length <= 9) && (runningList[0] !== '-')) {
-        // if array is less than or equal to 9 in length and there is not a '-' in front already, add one.
-        runningList.unshift('-');
+    console.log(`${runningList}`);
+
+ if ((runningList.length <= 9)) {
+        // if array is less than or equal to 9 in length add or remove the -.
+        displayValue = (displayValue * -1);
+        //update display value and then the running list with the newly calculated value!
+        runningList = String(displayValue).split("").map((displayValue)=>{
+            return (displayValue);
+            }) 
     }
 // this gets displayed if the function is called but there is not enough space for the - sign. 
     else {
@@ -155,9 +157,8 @@ function asPercentage() {
     if (runningList.length > 10) {
         return;
        }
-
-    //update displayvalue and then the running list with the newly calculated value
     displayValue = parseFloat(displayValue / 100);
+    //update display value and then the running list with the newly calculated value
     runningList = String(displayValue).split("").map((displayValue)=>{
         return (displayValue);
         }) 
