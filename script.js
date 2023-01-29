@@ -239,6 +239,11 @@ function mathFunctionSelect() {
         console.log(`num 2 is ${num2}`);
         console.log(`expression is ${num1} ${operatorSymbol} ${num2}`);
     }
+    else if (num1 && !num2) {
+        runningList = [];
+        console.log(`num 2 is ${num2}`);
+        console.log(`expression is ${num1} ${operatorSymbol} ${num2}`);
+    } 
 // if number 2 DNE at all, store current operator and store display value
     else if (!num2) {
         operator = operatorTemp;
@@ -246,8 +251,10 @@ function mathFunctionSelect() {
 
             //grab display value store it as num1
     num1 = displayValue;
+    num2 = 0;
+    displayValue = num2;
     console.log(`num2 DNE but num1 is ${num1}`);
-    console.log(`${num1} ${operator} number 2`);
+    console.log(`${num1} ${operator} TBD number 2`);
         //then clear the runninglist
     runningList = [];
         if (operatorTemp !== 'equals'){    
@@ -255,7 +262,7 @@ function mathFunctionSelect() {
     }
 }
 // add and if current operator is NOT = sign then do the following below. if == sign, then all num 1 num 2 and operator must be cleared at some point
-if (num1 && num2) {
+if (num1 && num2 && operator) {
     operate(num1, operator, num2);
     console.log(`${num1} ${operatorSymbol} ${num2}`);
     num1 = displayValue;
