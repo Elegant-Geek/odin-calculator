@@ -44,6 +44,10 @@ function clearDisplay() {
     console.log("Display cleared!");
 }
 function updateDisplay() {
+    // fixes value overflow on display update when dividing 5 / 3 for instance
+    runningList = String(displayValue).split("").map((displayValue)=>{
+        return (displayValue);
+        }) 
     if (runningList.length > 9) {
         console.log(`ERROR: length is too long (${runningList.length}) digits.`);
         //if array is too long, convert to string and keep only the first 8 characters for the display.
