@@ -209,11 +209,13 @@ function asPercentage() {
 function mathFunctionSelect() {
     // Grab the id of what button gets clicked! COOL!
     let operatorTemp = this.id;
+    let operatorSymbol = this.textContent;
 
     if (num1 && !num2) {
+        runningList = [];
         num2 = displayValue;
         console.log(`num 2 is ${num2}`);
-        console.log(`expression is ${num1} ${operator} ${num2}`);
+        console.log(`expression is ${num1} ${operatorSymbol} ${num2}`);
     }
 // if number 2 DNE at all, store current operator and store display value
     else if (!num2) {
@@ -226,16 +228,20 @@ function mathFunctionSelect() {
     console.log(`${num1} ${operator} number 2`);
         //then clear the runninglist
         clearDisplay();
-        displayPara.innerHTML = `${operator}`;
-
-
+        displayPara.innerHTML = `${num1} ${operatorSymbol}`;
 }
+// add and if current operator is NOT = sign then do the following below. if == sign, then all num 1 num 2 and operator must be cleared at some point
 if (num1 && num2) {
     operate(num1, operator, num2);
-    num1 = displayValue;
-    num2 = '';
-    updateDisplay();
+    console.log(`${num1} ${operatorSymbol} ${num2}`);
 
+    num1 = displayValue;
+    //grab current operator to evaluate the next expression
+    operator = operatorTemp;
+    num2 = false;
+    updateDisplay();
+    console.log(`${num1} ${operatorSymbol} ${num2}`);
+    console.log(runningList);
 }
 
     
