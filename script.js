@@ -138,11 +138,14 @@ function multiplyNumbers(num1, num2) {
 
 }
 function divideNumbers(num1, num2) {
+    //GET THIS WORKING!
     if (num2 === 0) {
         console.log('Cannot divide by 0.')
-        return num1;
+        return (num1);
     }
-    return (num1 / num2);
+    else {    
+        return (num1 / num2);
+    }
 }
 
 function plusMinus() {
