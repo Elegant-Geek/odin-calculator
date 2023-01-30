@@ -85,7 +85,7 @@ function displayNumber() {
         // using map() to convert array of strings to numbers: https://bit.ly/3wDnX5U
         return parseInt(str); });
         // if everything in the array adds up to 0 and the current input is 0, get out of the function!
-       if ((sumofDigits.reduce((a, b) => a + b, 0) === 0) && (numberButtonInput === '0')) {
+       if ((sumofDigits.reduce((a, b) => a + b, 0) === 0) && (numberButtonInput === '0') && runningList.length > 0) {
         console.log('leading zero removed');
         return;
        }
@@ -243,7 +243,7 @@ function mathFunctionSelect() {
     let operatorTemp = this.id;
     let operatorSymbol = this.textContent;
 
-    if (num1 && !num2) {
+    if ((num1) && !num2) {
         runningList = [];
 
 
@@ -257,7 +257,7 @@ function mathFunctionSelect() {
         operator = operatorTemp;
         console.log(`${operator} is selected.`);
         //this code below fixes the (89 = + 1 = 891 glitch and returns 90)
-        if (operatorTemp === 'equals') {
+        if (operatorTemp === 'equals' && num1 !== 0) {
             console.log('spit out return num1');
             return;
         }
