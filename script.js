@@ -50,7 +50,7 @@ function updateDisplay() {
     if (displayValue.toString().length > 9) {
         console.log(`ERROR: length is too long (${runningList.length}) digits.`);
         //if array is too long, convert to string and keep only the first 8 characters for the display.
-        displayValue = String(displayValue).substring(0,9);
+        displayValue = String(displayValue).substring(0,8);
         // SOURCE: https://www.geeksforgeeks.org/how-to-convert-a-number-into-array-in-javascript/ 
         // updates running list to keep the last 9 characters onscreen
         runningList = String(displayValue).split("").map((displayValue)=>{
