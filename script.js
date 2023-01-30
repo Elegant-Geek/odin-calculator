@@ -1,4 +1,4 @@
-// welcome to the js file. SO HAPPY I FIXED THE NEGATIVE!!!!!
+// welcome to the js file. HUGE CHECKPOINT
 let num1;
 let num2;
 let operator;
