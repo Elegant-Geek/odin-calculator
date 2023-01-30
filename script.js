@@ -155,12 +155,7 @@ function plusMinus() {
     console.log(`${runningList}`);
 
  if ((runningList.length <= 9)) {
-        // if array is less than or equal to 9 in length add or remove the -.
-        displayValue = (displayValue * -1);
-        //update display value and then the running list with the newly calculated value!
-        runningList = String(displayValue).split("").map((displayValue)=>{
-            return (displayValue);
-            }) 
+
             // After updating with a value of 0 if % function is run on an array with nothing in it and just ['0'] is returned...
 // Into the array from the split("").map above, and if that resulting ['0'] is the only thing sitting in the array, 
 // Remove it from the array (.shift();) which leaves the array clear for any following number input. 
@@ -172,6 +167,14 @@ function plusMinus() {
             runningList.shift();
             console.log('PLEASE WORK');
             displayValue = 0;
+        }
+        else {
+                    // if array is less than or equal to 9 in length add or remove the -.
+        displayValue = (displayValue * -1);
+        //update display value and then the running list with the newly calculated value!
+        runningList = String(displayValue).split("").map((displayValue)=>{
+            return (displayValue);
+            }) 
         }
     }
 // this gets displayed if the function is called but there is not enough space for the - sign. 
