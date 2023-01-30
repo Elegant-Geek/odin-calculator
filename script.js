@@ -1,4 +1,4 @@
-// welcome to the js file. GIT checkpoint for all tests passed
+// welcome to the js file. SO HAPPY I FIXED THE NEGATIVE!!!!!
 let num1;
 let num2;
 let operator;
