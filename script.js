@@ -163,6 +163,10 @@ function plusMinus() {
         if (runningList[0] === '0' && runningList.length === 1) {
             runningList.unshift('-');
         }
+        // if array is blank upon first load, clear screen etc. like runningList is like this [], then add a 0 and a - to it!]
+        else if ( runningList.length == 0 ) {
+            runningList = ['-', 0];
+        }
         else if ((runningList[0] === '-') && (runningList[1] === '0')) {
             runningList.shift();
             console.log('PLEASE WORK');
