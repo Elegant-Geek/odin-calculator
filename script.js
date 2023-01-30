@@ -1,4 +1,4 @@
-// welcome to the js file
+// welcome to the js file. GIT checkpoint for all tests passed
 let num1;
 let num2;
 let operator;
