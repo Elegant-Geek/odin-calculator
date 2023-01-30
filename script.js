@@ -48,9 +48,9 @@ function updateDisplay() {
 
     // CHANGED THIS CONDITION TO ONLY RELY ON CURRENT DISPLAY VALUE. hen doing 5/3, blank array is returned
     if (displayValue.toString().length > 9) {
-        console.log(`ERROR: length is too long (${runningList.length}) digits.`);
-        //if array is too long, convert to string and keep only the first 8 characters for the ANY updated display.
-        displayValue = String(displayValue).substring(0,8);
+        console.log(`ERROR: length is too long (${runningList.length}) digits. (NOTE: large numbers over 9 digits- or 8 with a decimal will not be displayed properly.)`);
+        //if array is too long, convert to string and keep only the first 9 characters for the ANY updated display.
+        displayValue = String(displayValue).substring(0,9);
         // SOURCE: https://www.geeksforgeeks.org/how-to-convert-a-number-into-array-in-javascript/ 
         // updates running list to keep the last 9 characters onscreen
         runningList = String(displayValue).split("").map((displayValue)=>{
@@ -170,6 +170,7 @@ function plusMinus() {
         }
         else if ((runningList[0] === '-') && (runningList[1] === '0')) {
             runningList.shift();
+            console.log('PLEASE WORK');
             displayValue = 0;
         }
     }
@@ -274,10 +275,9 @@ function mathFunctionSelect() {
         displayPara.innerHTML = `${num1} ${operatorSymbol}`;
     }
 }
-// add and if current operator is NOT = sign then do the following below. if == sign, then all num 1 num 2 and operator must be cleared at some point
 if (num1 && num2 && operator) {
     operate(num1, operator, num2);
-    // always have num1 rounded to 8 chars!!!! Do not remove.
+    // always have num1 rounded to 8 chars!!!! Do not remove. Using substring(0,8) not (0,9) here so there is room for + - % etc onscreen without text overspill
     num1 =  String(displayValue).substring(0,8);
     //convert back to number after chopping off the string so that accidental concatenation with the PLUS does not happen when adding a chopped off long decimal number!
     num1 = Number(num1);
