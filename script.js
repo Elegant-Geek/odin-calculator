@@ -89,8 +89,8 @@ function displayNumber() {
         console.log('leading zero removed');
         return;
        }
-
-       if ((runningList[0] === '-') && (runningList[1] === '0')) {
+// if it starts with a negative and then followed by a zero but does NOT contain a decimal, then you can pop. otherwise, DO NOT POP
+       if ((runningList[0] === '-') && (runningList[1] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
         runningList.pop();
        }
 
