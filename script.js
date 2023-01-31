@@ -1,4 +1,4 @@
-// welcome to the js file. HUGE CHECKPOINT
+// welcome to the js file. HUGE PLUSMINUS TOGGLE CHECKPOINT
 let num1;
 let num2;
 let operator;
