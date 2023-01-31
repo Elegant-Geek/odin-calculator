@@ -47,7 +47,8 @@ function updateDisplay() {
     // CHANGED THIS CONDITION TO ONLY RELY ON CURRENT DISPLAY VALUE, NOT RUNNINGLIST ARRAY. When doing 5/3, blank array is returned.
     // if array is too long, convert to string and keep only the first 9 characters for the ANY updated display. A warning in the console exists too.
     if (displayValue.toString().length > 9) {
-        console.log(`ERROR: length is too long (${runningList.length}) digits. (NOTE: large numbers over 9 digits- or 8 with a decimal will not be displayed properly.)`);
+        console.log(`ERROR: length is too long (over 9 characters). Please clear the display.`);
+        console.log(`(NOTE: large numbers over 9 digits- or 8 with a decimal will not be displayed properly.)`);
         // take current display value and only keep the FIRST 9 DIGITS.
         displayValue = String(displayValue).substring(0,9);
         // SOURCE: https://www.geeksforgeeks.org/how-to-convert-a-number-into-array-in-javascript/ 
@@ -290,3 +291,5 @@ function mathFunctionSelect() {
         }
     }
 }
+
+// Worked on this project from weds 1.25.23 to monday 1.30.23.
