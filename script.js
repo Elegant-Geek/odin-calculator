@@ -67,40 +67,36 @@ function updateDisplay() {
 function displayNumber() {
     // display the text content of each numberButtons[i]
     // console.log(`${this.textContent}`);
-    // assign the current place in the array
+    // grab the current location of the exact number button in the array (function passes in numberButtons[i]) and grab the text content from this point in the array using "this".
     let numberButtonInput = this.textContent;
-    // stop the array from accumulating more than 10 digits upon any further button press!
-    // NOTE: this check is done first because the other checks below activate pushes which adds one more valid value to the array.
-    // NOTE: this value is 9 instead of 10 because the pushing of an array element happens AFTER this check (adds one more element) and spans over different conditionals.
     // https://www.w3schools.com/jsref/jsref_indexof.asp
     // ^^^^ The runningList.indexOf("e") !== -1 checks if any match is present by using indexOf("e"). -1 is returned if check is false. Therefore, !== -1 means a match to "e" was found.
     if (runningList.indexOf("e") !== -1) {
         console.log("ERROR: 'E notation' expression is present. Select an operator button.");
         return;
-       }
-
-       let sumofDigits = runningList.map(function(str) {
-        // using map() to convert array of strings to numbers: https://bit.ly/3wDnX5U
-        return parseInt(str); });
-        // if everything in the array adds up to 0 and the current input is 0, get out of the function!
-       if ((sumofDigits.reduce((a, b) => a + b, 0) === 0) && (numberButtonInput === '0') && runningList.length > 0) {
-        console.log('leading zero removed');
-        return;
-       }
-// if it starts with a negative and then followed by a zero but does NOT contain a decimal, then you can pop. otherwise, DO NOT POP
+    }
+    // using map() to convert array of strings to numbers: https://bit.ly/3wDnX5U
+    let sumofDigits = runningList.map(function(str) {
+    return parseInt(str); });
+    // if everything in the array adds up to 0 and the current input is 0, get out of the function! (The last part of the and statement means you will stay in the function if a single 0 is the only thing in the array.)
+    if ((sumofDigits.reduce((a, b) => a + b, 0) === 0) && (numberButtonInput === '0') && runningList.length > 0) {
+    console.log('leading zero removed (This prevents you from typing in 00000).');
+    return;
+    }
+// if list starts with a negative and then followed by a zero but does NOT contain a decimal, then you can remove the leading 0 (I don't want the leading 0 removed for decimal input)
 // this removes the floating 0 in -08 for instance
-       if ((runningList[0] === '-') && (runningList[1] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
-        runningList.pop();
-        console.log('for the negative toggle mode, removed floating zero that appeared after the +/- toggle (GOOD)');
-       }
-       // else if the runninglist only has 0 in it and no decimal, then you can remove that zero in the FRONT
-       // this removes the floating 0 in positive 08 for instance
-       else if ((runningList[0] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
-        runningList.shift();
-        console.log('for the positive toggle mode, removed floating zero (first array element) that appeared after the +/- toggle (GOOD)');
-       }
-
-
+    if ((runningList[0] === '-') && (runningList[1] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
+    runningList.pop();
+    // ['-','0'] becomes [-] before you push the next digit in further along in this function. 
+    console.log('for the negative toggle mode, removed floating zero that appears after the +/- toggle (GOOD)');
+    }
+    // else if the runninglist only has 0 in it and no decimal, then you can remove that zero in the FRONT
+    // this removes the floating 0 in positive 08 for instance
+    else if ((runningList[0] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
+    runningList.shift();
+    // ['0'] becomes [] before you push the next digit in further along in this function. 
+    console.log('for the positive toggle mode, removed floating zero that appears after the +/- toggle (GOOD)');
+    }
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
     if ((numberButtonInput !== '.') && (runningList.length === 1)) {
         // if the first thing typed in is NOT a decimal, and the current display has 0, and 0 is the first and... 
@@ -110,7 +106,8 @@ function displayNumber() {
         updateDisplay();
         return;
     }
-    // if the clear all button is run, the length of the array is empty. If a decimal place is the input and the array is completely empty, push a leading 0 then the '.' dot.
+    // if array is empty (ex: after a cleardisplay, and if a decimal place is typed, push a leading 0 first and THEN the '.' dot.
+    // user sees 0 onscreen then presses '.' then gets back "0." rather than just "." (BAD)
     else if ((numberButtonInput === '.') && (runningList.length === 0)) {
         runningList.push('0');
         runningList.push(numberButtonInput);
@@ -125,30 +122,26 @@ function displayNumber() {
         return;
     }
     else {
-
+    // for all other instances, push (add) the selected number button input to the end of the runninglist array.
     runningList.push(numberButtonInput);
     displayValue = (runningList.join(''));
     updateDisplay();    
     }
-
-
     // verify the display value is a number every time the value is updated by running this display number function:
     // console.log(typeof displayValue);
 }
-// ------------------------------------------------- THESE FOUR FUNCTIONS WILL BE MODIFIED SOON -------------------------------------------------
+// ------------------------------------------------- THE FOUR FUNCTIONS -------------------------------------------------
 function addNumbers(num1, num2) {
     return (num1 + num2);
 }
 function subtractNumbers(num1, num2) {
     return (num1 - num2);
-
 }
 function multiplyNumbers(num1, num2) {
     return (num1 * num2);
-
 }
 function divideNumbers(num1, num2) {
-    //GET THIS WORKING!
+    //division by 0 just returns the first numerical input (num1) If you divide 8 by 8, you get 8 back.
     if (num2 === 0) {
         console.log('Cannot divide by 0.')
         return (num1);
@@ -157,7 +150,6 @@ function divideNumbers(num1, num2) {
         return (num1 / num2);
     }
 }
-
 function plusMinus() {
     console.log(`${runningList}`);
 
