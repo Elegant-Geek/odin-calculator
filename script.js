@@ -237,6 +237,8 @@ function asPercentage() {
         //         console.log('% that');
         //     }
         // }
+        if (num1 === '0' || num2 === '0')
+        {console.log('AWOOGASUCCESS');}
         if (operator === 'add') {
            displayValue = addNumbers(num1, num2);
         }
@@ -261,20 +263,21 @@ function mathFunctionSelect() {
     // Grab the id of what button gets clicked! COOL!
     let operatorTemp = this.id;
     let operatorSymbol = this.textContent;
-
-    if ((num1) && !num2) {
+// if just 'if num1' then 0 as an input gets ignored
+    if ((num1 || num1 === 0) && !num2) {
         runningList = [];
-
-
         num2 = displayValue;
+        console.log(runningList)
+        console.log(`num1 ${num1} num2 ${num2}operatorRR${operator}`);
         console.log(`num 2 is ${num2}`);
-        console.log(`expression is ${num1} ${operatorSymbol} ${num2}`);
+        console.log(`expression is ${num1} ${operator} ${num2}`);
     }
 
 // if number 2 DNE at all, store current operator and store display value
     else if (!num2) {
         operator = operatorTemp;
         console.log(`${operator} is selected.`);
+        console.log(`num1 ${num1} num2 ${num2}operatorrrr${operator}`);
         //this code below fixes the (89 = + 1 = 891 glitch and returns 90)
         if (operatorTemp === 'equals' && num1 !== 0) {
             console.log('spit out return num1');
@@ -287,15 +290,22 @@ function mathFunctionSelect() {
     // if display value has "false anywhere in it" then num2 = 0 otherwise displayvalue = num2
     displayValue = num2;
     console.log(`num2 DNE but num1 is ${num1}`);
-    console.log(`${num1} ${operatorSymbol} TBD number 2`);
+    console.log(`${num1} ${operator} TBD number 2`);
         //then clear the runninglist
     runningList = [];
         if (operatorTemp !== 'equals'){    
         displayPara.innerHTML = `${num1} ${operatorSymbol}`;
     }
+
+}
+console.log(`we are right before evaluation! NUMBER 1 IS ${num1} NUM 2 IS ${num2} `);
+if (num1 === 0 || num2 === 0) {
+    console.log('matches to 0!');
 }
 if (num1 && num2 && operator) {
+
     operate(num1, operator, num2);
+    console.log(`the answer to ${num1} ${operator} ${num2} is ${displayValue}.`);
     // always have num1 rounded to 8 chars!!!! Do not remove. Using substring(0,8) not (0,9) here so there is room for + - % etc onscreen without text overspill
     num1 =  String(displayValue).substring(0,8);
     //convert back to number after chopping off the string so that accidental concatenation with the PLUS does not happen when adding a chopped off long decimal number!
