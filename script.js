@@ -263,7 +263,7 @@ function mathFunctionSelect() {
     // Grab the id of what button gets clicked! COOL!
     let operatorTemp = this.id;
     let operatorSymbol = this.textContent;
-// if just 'if num1' then 0 as an input gets ignored
+// if just 'if num1' then 0 as an input gets ignored. This was my fix! 
     if ((num1 || num1 === 0) && !num2) {
         runningList = [];
         num2 = displayValue;
@@ -302,7 +302,7 @@ console.log(`we are right before evaluation! NUMBER 1 IS ${num1} NUM 2 IS ${num2
 if (num1 === 0 || num2 === 0) {
     console.log('matches to 0!');
 }
-if (num1 && num2 && operator) {
+if ((num1 || num1 === 0) && (num2 || num2 === 0) && operator) {
 
     operate(num1, operator, num2);
     console.log(`the answer to ${num1} ${operator} ${num2} is ${displayValue}.`);
