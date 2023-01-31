@@ -237,7 +237,7 @@ function asPercentage() {
         //         console.log('% that');
         //     }
         // }
-        if (num1 === '0' || num2 === '0')
+        if (num1 === 0 || num2 === 0)
         {console.log('AWOOGASUCCESS');}
         if (operator === 'add') {
            displayValue = addNumbers(num1, num2);
