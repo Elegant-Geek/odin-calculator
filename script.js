@@ -90,9 +90,18 @@ function displayNumber() {
         return;
        }
 // if it starts with a negative and then followed by a zero but does NOT contain a decimal, then you can pop. otherwise, DO NOT POP
+// this removes the floating 0 in -08 for instance
        if ((runningList[0] === '-') && (runningList[1] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
         runningList.pop();
+        console.log('for the negative toggle mode, removed floating zero that appeared after the +/- toggle (GOOD)');
        }
+       // else if the runninglist only has 0 in it and no decimal, then you can remove that zero in the FRONT
+       // this removes the floating 0 in positive 08 for instance
+       else if ((runningList[0] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
+        runningList.shift();
+        console.log('for the positive toggle mode, removed floating zero (first array element) that appeared after the +/- toggle (GOOD)');
+       }
+
 
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
     if ((numberButtonInput !== '.') && (runningList.length === 1)) {
@@ -166,10 +175,11 @@ function plusMinus() {
         // if array is blank upon first load, clear screen etc. like runningList is like this [], then add a 0 and a - to it!]
         else if ( runningList.length == 0 ) {
             runningList = ['-', '0'];
+            console.log('Negative sign added!');
         }
         else if ((runningList[0] === '-') && (runningList[1] === '0')) {
             runningList.shift();
-            console.log('PLEASE WORK');
+            console.log('Negative sign removed!');
             displayValue = 0;
         }
         else {
