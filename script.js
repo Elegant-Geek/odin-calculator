@@ -7,54 +7,51 @@ let runningList = [];
 let displayValue = 0;
 // grab the main display box that holds the calculator to use as a reference div
 const displayParent = document.querySelector('.calculator-display');
-// create new dom paragraph element, set the text content
+// create new dom paragraph element, set the text content, then append to parent container
 const displayPara = document.createElement('p');
 displayPara.textContent = `${displayValue}`;
 displayParent.appendChild(displayPara);
-// grab all number buttons
+// grab all of the number buttons and function buttons, assign as DOM constants
 const numberButtons = document.querySelectorAll('.number-button');
 const functionButtons = document.querySelectorAll('.function-button');
-// The line below only works for a single button but can't assign an event listener to each button on its own!
-// numberButtons.addEventListener("click",  displayNumber);
+// assign specific constants to specific DOM elements by ID (These are the three function buttons. Each button has its own function associated with it on the next line)
 const plusMinusButton = document.getElementById('plus-minus');
 plusMinusButton.addEventListener('click', plusMinus); 
 const percentageButton = document.getElementById('percentage');
 percentageButton.addEventListener('click', asPercentage); 
 const clearButton = document.getElementById('clear-button');
 clearButton.addEventListener('click', clearDisplay); 
-
 // iterate through all number buttons to add event listener to each number button
 for (let i = 0 ; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener('click', displayNumber); 
  }
-
  // iterate through all function buttons to add event listener to each function button
 for (let i = 0 ; i < functionButtons.length; i++) {
     functionButtons[i].addEventListener('click', mathFunctionSelect); 
  }
-
 function clearDisplay() {
-    //clears the place where the expression is stored
+    // clears the place where the expression is stored
     runningList = [];
-    //clears the display value that is tied to the expression
+    // clears the display value back to 0
     displayValue = 0;
-    //clear num 1 num 2 and operator
+    //reset num 1 num 2 and operator variables completely
     num1 = false;
     num2 = false;
     operator = false;
+    //update display and ensure the running list is associated / updated to match this display value.
     updateDisplay();
     console.log("Display cleared!");
 }
 function updateDisplay() {
     // fixes value overflow on display update when dividing 5 / 3 for instance
-
-    // CHANGED THIS CONDITION TO ONLY RELY ON CURRENT DISPLAY VALUE. hen doing 5/3, blank array is returned
+    // CHANGED THIS CONDITION TO ONLY RELY ON CURRENT DISPLAY VALUE, NOT RUNNINGLIST ARRAY. When doing 5/3, blank array is returned.
+    // if array is too long, convert to string and keep only the first 9 characters for the ANY updated display. A warning in the console exists too.
     if (displayValue.toString().length > 9) {
         console.log(`ERROR: length is too long (${runningList.length}) digits. (NOTE: large numbers over 9 digits- or 8 with a decimal will not be displayed properly.)`);
-        //if array is too long, convert to string and keep only the first 9 characters for the ANY updated display.
+        // take current display value and only keep the FIRST 9 DIGITS.
         displayValue = String(displayValue).substring(0,9);
         // SOURCE: https://www.geeksforgeeks.org/how-to-convert-a-number-into-array-in-javascript/ 
-        // updates running list to keep the last 9 characters onscreen
+        // updates running list to keep the first 9 characters onscreen
         runningList = String(displayValue).split("").map((displayValue)=>{
             return (displayValue);
             })        
@@ -62,11 +59,10 @@ function updateDisplay() {
     console.log(runningList);
     console.log(displayValue);
     displayPara.textContent = `${displayValue}`;
-    // update display value with a numerical conversion type AFTER the display is updated so that decimal points are rendered. 
+    // MUST update display value with a numerical conversion type (line 65) AFTER the display is updated so that decimal points are rendered. 
     // If the display was updated with the Number() acting on the displayvalue before printing, the decimal gets ignored by the Number() function (view becomes inaccurate.)
     // "78." becomes 78 when converted to number format below.
     displayValue = Number(displayValue);
-
 }
 function displayNumber() {
     // display the text content of each numberButtons[i]
