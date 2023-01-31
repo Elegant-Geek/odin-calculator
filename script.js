@@ -56,8 +56,9 @@ function updateDisplay() {
             return (displayValue);
             })        
     }
-    console.log(runningList);
-    console.log(displayValue);
+    // uncomment these two lines for more console log feedback every time display is updated!!!!!! ------------------------------------------------------------
+    // console.log(runningList);
+    // console.log(displayValue);
     displayPara.textContent = `${displayValue}`;
     // MUST update display value with a numerical conversion type (line 65) AFTER the display is updated so that decimal points are rendered. 
     // If the display was updated with the Number() acting on the displayvalue before printing, the decimal gets ignored by the Number() function (view becomes inaccurate.)
@@ -228,8 +229,8 @@ function operate(num1, operator, num2) {
             displayValue = divideNumbers(num1, num2);
         }
         else {
-            console.log('equals sign is being used')
-            console.log(`num1 is ${num1} operator is ${operator} num2 is ${num2}`)
+            console.log('equals sign is being used repeatedly, ignore the next line you see below.');
+            // console.log(`num1 is ${num1} operator is ${operator} num2 is ${num2}`)
     }
 }
 // runs whenever a function button is pressed.
@@ -241,16 +242,14 @@ function mathFunctionSelect() {
     if ((num1 || num1 === 0) && !num2) {
         runningList = [];
         num2 = displayValue;
-        console.log(runningList)
-        console.log(`num1 ${num1} num2 ${num2}operatorRR${operator}`);
-        console.log(`num 2 is ${num2}`);
-        console.log(`expression is ${num1} ${operator} ${num2}`);
+        // console.log(runningList)
+        // console.log(`num 2 is ${num2}`);
+        // console.log(`expression is ${num1} ${operator} ${num2}`);
     }
 // if number 2 DNE at all, store current operator and store display value.
     else if (!num2) {
         operator = operatorTemp;
-        console.log(`${operator} is selected.`);
-        console.log(`num1 ${num1} num2 ${num2}operatorrrr${operator}`);
+        // console.log(`${operator} is selected.`);
         //this code below fixes the (89 = + 1 = 891 glitch and returns 90)
         if (operatorTemp === 'equals' && num1 !== 0) {
             console.log('spit out return num1');
@@ -270,7 +269,7 @@ function mathFunctionSelect() {
     }
 }
 // this line is run RIGHT before evaluation as a good debugging check
-console.log(`Number one is ${num1}. Number 2 is ${num2}.`);
+// console.log(`Number one is ${num1}. Number 2 is ${num2}.`);
 // like above, if conditional is only 'if num1' then 0 as an input gets ignored. This was my fix! Add the additional || num1 === 0 etc.
     if ((num1 || num1 === 0) && (num2 || num2 === 0) && operator) {
         operate(num1, operator, num2);
