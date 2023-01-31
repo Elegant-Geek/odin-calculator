@@ -1,13 +1,15 @@
-// welcome to the js file. HUGE PLUSMINUS TOGGLE CHECKPOINT
+// define numerical input num1 num2 and operator
 let num1;
 let num2;
 let operator;
+// empty the array on first load and the display value onscreen is 0
 let runningList = [];
 let displayValue = 0;
+// grab the main display box that holds the calculator to use as a reference div
 const displayParent = document.querySelector('.calculator-display');
-// create new dom element p tag thing that gets created by default set to zero
+// create new dom paragraph element, set the text content
 const displayPara = document.createElement('p');
-displayPara.innerHTML = `${displayValue}`;
+displayPara.textContent = `${displayValue}`;
 displayParent.appendChild(displayPara);
 // grab all number buttons
 const numberButtons = document.querySelectorAll('.number-button');
@@ -294,7 +296,7 @@ function mathFunctionSelect() {
         //then clear the runninglist
     runningList = [];
         if (operatorTemp !== 'equals'){    
-        displayPara.innerHTML = `${num1} ${operatorSymbol}`;
+        displayPara.textContent = `${num1} ${operatorSymbol}`;
     }
 
 }
@@ -317,7 +319,7 @@ if ((num1 || num1 === 0) && (num2 || num2 === 0) && operator) {
     num2 = false;
     updateDisplay();
     if (operatorTemp !== 'equals'){    
-        displayPara.innerHTML = `${num1} ${operatorSymbol}`;
+        displayPara.textContent = `${num1} ${operatorSymbol}`;
     }
     console.log(`${num1} ${operatorSymbol} ${num2}`);
     console.log(runningList);
