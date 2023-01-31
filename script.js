@@ -171,11 +171,12 @@ function plusMinus() {
 // If this conditional is removed, the floating 0 in front is retained from the array and shown in display. BAD! (Again it only runs when runninglist is: ['0'] after % is run.)
         if (runningList[0] === '0' && runningList.length === 1) {
             runningList.unshift('-');
+            console.log('Negative sign added to 0!');
         }
         // if array is blank upon first load, clear screen etc. like runningList is like this [], then add a 0 and a - to it!]
-        else if ( runningList.length == 0 ) {
+        else if (runningList.length == 0 ) {
             runningList = ['-', '0'];
-            console.log('Negative sign added!');
+            console.log('Negative sign added to blank array!');
         }
         else if ((runningList[0] === '-') && (runningList[1] === '0')) {
             runningList.shift();
@@ -185,6 +186,7 @@ function plusMinus() {
         else {
                     // if array is less than or equal to 9 in length add or remove the -.
         displayValue = (displayValue * -1);
+        console.log('Multiplied number * -1!');
         //update display value and then the running list with the newly calculated value!
         runningList = String(displayValue).split("").map((displayValue)=>{
             return (displayValue);
