@@ -80,7 +80,7 @@ function displayNumber() {
     return parseInt(str); });
     // if everything in the array adds up to 0 and the current input is 0, get out of the function! (The last part of the and statement means you will stay in the function if a single 0 is the only thing in the array.)
     if ((sumofDigits.reduce((a, b) => a + b, 0) === 0) && (numberButtonInput === '0') && runningList.length > 0) {
-    console.log('leading zero removed (This prevents you from typing in 00000).');
+    console.log('Leading zero removed (This prevents you from typing in 00000).');
     return;
     }
 // if list starts with a negative and then followed by a zero but does NOT contain a decimal, then you can remove the leading 0 (I don't want the leading 0 removed for decimal input)
@@ -88,14 +88,14 @@ function displayNumber() {
     if ((runningList[0] === '-') && (runningList[1] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
     runningList.pop();
     // ['-','0'] becomes [-] before you push the next digit in further along in this function. 
-    console.log('for the negative toggle mode, removed floating zero that appears after the +/- toggle (GOOD)');
+    console.log('For the negative toggle mode, removed floating zero that appears after the +/- toggle (GOOD)');
     }
     // else if the runninglist only has 0 in it and no decimal, then you can remove that zero in the FRONT
     // this removes the floating 0 in positive 08 for instance
     else if ((runningList[0] === '0') && (runningList.filter(x => x === '.').length === 0 )) {
     runningList.shift();
     // ['0'] becomes [] before you push the next digit in further along in this function. 
-    console.log('for the positive toggle mode, removed floating zero that appears after the +/- toggle (GOOD)');
+    console.log('For the positive toggle mode, removed floating zero that appears after the +/- toggle (GOOD)');
     }
     // if the array of all the values starts with a decimal and ONLY contains just that first decimal, update the DOM display w/o number conversion, then break out of the function
     if ((numberButtonInput !== '.') && (runningList.length === 1)) {
@@ -152,10 +152,8 @@ function divideNumbers(num1, num2) {
 }
 function plusMinus() {
     console.log(`${runningList}`);
-
- if ((runningList.length <= 9)) {
-
-            // After updating with a value of 0 if % function is run on an array with nothing in it and just ['0'] is returned...
+    if ((runningList.length <= 9)) {
+// After updating with a value of 0 if % function is run on an array with nothing in it and just ['0'] is returned...
 // Into the array from the split("").map above, and if that resulting ['0'] is the only thing sitting in the array, 
 // Remove it from the array (.shift();) which leaves the array clear for any following number input. 
 // If this conditional is removed, the floating 0 in front is retained from the array and shown in display. BAD! (Again it only runs when runninglist is: ['0'] after % is run.)
@@ -174,7 +172,7 @@ function plusMinus() {
             displayValue = 0;
         }
         else {
-                    // if array is less than or equal to 9 in length add or remove the -.
+        // if array is less than or equal to 9 in length and a normal nonzero number is entered (-5, 0.003, 86, etc), add or remove the negative sign.
         displayValue = (displayValue * -1);
         console.log('Multiplied number * -1!');
         //update display value and then the running list with the newly calculated value!
@@ -184,6 +182,8 @@ function plusMinus() {
         }
     }
 // this gets displayed if the function is called but there is not enough space for the - sign. 
+// (This has error been disabled by the rounding function in update display. Chars will never exceed 9)
+// if line 52, displayValue = String(displayValue).substring(0,9), is changed from 0,9 to 0,10 (grabs first 10 chars) then maybe this error will re-activate. NOPE! 
     else {
         console.log("ERROR: no room to add a -");
         console.log(`${runningList.length} characters are already displayed`);
@@ -192,43 +192,29 @@ function plusMinus() {
     // displayValue = (displayValue * -1);
     updateDisplay();
 }
-
 function asPercentage() {
     // you cannot use the percentage button if array is 9+ characters including decimal or if array is 9+ characters including an existing '-' sign and decimals. 
     if (runningList.length > 10) {
+        console.log('you cannot use the % button if array is over 10 characters including decimals and - sign');
+        // note: this is set to 10 instead of 9 because if it is set to 9, then the rounding overflow doesn't kick in and the button/function doesnt run! I'm ok with losing a decimal.
         return;
-       }
+    }
     displayValue = parseFloat(displayValue / 100);
     //update display value and then the running list with the newly calculated value
     runningList = String(displayValue).split("").map((displayValue)=>{
-        return (displayValue);
+    return (displayValue);
         }) 
-// After updating with a value of 0 if % function is run on an array with nothing in it and just ['0'] is returned...
-// Into the array from the split("").map above, and if that resulting ['0'] is the only thing sitting in the array, 
-// Remove it from the array (.shift();) which leaves the array clear for any following number input. 
-// If this conditional is removed, the floating 0 in front is retained from the array and shown in display. BAD! (Again it only runs when runninglist is: ['0'] after % is run.)
+// After updating with a value of 0 if % function is run on an array with nothing in it and just ['0'] is returned
+// into the array from the split("").map above, and if that resulting ['0'] is the only thing sitting in the array, 
+// remove it from the array (.shift();) which leaves the array clear for any following number input. 
+// If this conditional is removed, the floating 0 in front is retained from the array and shown in display. BAD! 
+// (Again it only runs when runninglist is: ['0'] after % is run!!!)
         if (runningList[0] === '0' && runningList.length === 1) {
             runningList.shift();
         }
-   
-
         updateDisplay();
     }
-
-    function operate(num1, operator, num2) {
-        // if number 2 is not given, either one of two functions is run: (+/- or %). (NOTE: the visual equal sign will soon be hooked up to CALL THE OPERATE FUNCTION after two numbers are input)
-        // if (!(num2)) {
-        //     if (operator === '+/-') {
-        //         return plusMinus(num1);
-        //         console.log('plusminus');
-        //     }
-        //     else if (operator === '%') {
-        //         return asPercentage(num1);
-        //         console.log('% that');
-        //     }
-        // }
-        if (num1 === 0 || num2 === 0)
-        {console.log('AWOOGASUCCESS');}
+function operate(num1, operator, num2) {
         if (operator === 'add') {
            displayValue = addNumbers(num1, num2);
         }
@@ -245,15 +231,13 @@ function asPercentage() {
             console.log('equals sign is being used')
             console.log(`num1 is ${num1} operator is ${operator} num2 is ${num2}`)
     }
-    }
-    
-
+}
 // runs whenever a function button is pressed.
 function mathFunctionSelect() {
     // Grab the id of what button gets clicked! COOL!
     let operatorTemp = this.id;
     let operatorSymbol = this.textContent;
-// if just 'if num1' then 0 as an input gets ignored. This was my fix! 
+    // if conditional is only 'if num1' then 0 as an input gets ignored. This was my fix! Add the additional || num1 === 0
     if ((num1 || num1 === 0) && !num2) {
         runningList = [];
         num2 = displayValue;
@@ -262,8 +246,7 @@ function mathFunctionSelect() {
         console.log(`num 2 is ${num2}`);
         console.log(`expression is ${num1} ${operator} ${num2}`);
     }
-
-// if number 2 DNE at all, store current operator and store display value
+// if number 2 DNE at all, store current operator and store display value.
     else if (!num2) {
         operator = operatorTemp;
         console.log(`${operator} is selected.`);
@@ -273,74 +256,38 @@ function mathFunctionSelect() {
             console.log('spit out return num1');
             return;
         }
-
-            //grab display value store it as num1
+    // grab display value store it as num1
     num1 = displayValue;
+    // set num 2 to false TBH I think I can get rid of this line
     num2 = false;
-    // if display value has "false anywhere in it" then num2 = 0 otherwise displayvalue = num2
     displayValue = num2;
-    console.log(`num2 DNE but num1 is ${num1}`);
-    console.log(`${num1} ${operator} TBD number 2`);
-        //then clear the runninglist
+    console.log(`${num1} ${operator}, number 2 is not selected yet.`);
+    // then clear the runninglist
     runningList = [];
+    // hide any '=' operator from the visual display because it can be confusing.
         if (operatorTemp !== 'equals'){    
         displayPara.textContent = `${num1} ${operatorSymbol}`;
     }
-
 }
-console.log(`we are right before evaluation! NUMBER 1 IS ${num1} NUM 2 IS ${num2} `);
-if (num1 === 0 || num2 === 0) {
-    console.log('matches to 0!');
-}
-if ((num1 || num1 === 0) && (num2 || num2 === 0) && operator) {
-
-    operate(num1, operator, num2);
-    console.log(`the answer to ${num1} ${operator} ${num2} is ${displayValue}.`);
-    // always have num1 rounded to 8 chars!!!! Do not remove. Using substring(0,8) not (0,9) here so there is room for + - % etc onscreen without text overspill
-    num1 =  String(displayValue).substring(0,8);
-    //convert back to number after chopping off the string so that accidental concatenation with the PLUS does not happen when adding a chopped off long decimal number!
-    num1 = Number(num1);
-    console.log(`${num1} ${operatorSymbol} ${num2}`);
-    console.log(typeof num1);
-    //grab current operator to evaluate the next expression
-    operator = operatorTemp;
-    num2 = false;
-    updateDisplay();
-    if (operatorTemp !== 'equals'){    
-        displayPara.textContent = `${num1} ${operatorSymbol}`;
+// this line is run RIGHT before evaluation as a good debugging check
+console.log(`Number one is ${num1}. Number 2 is ${num2}.`);
+// like above, if conditional is only 'if num1' then 0 as an input gets ignored. This was my fix! Add the additional || num1 === 0 etc.
+    if ((num1 || num1 === 0) && (num2 || num2 === 0) && operator) {
+        operate(num1, operator, num2);
+        console.log(`the answer to ${num1} ${operator} ${num2} is ${displayValue}.`);
+        // always have num1 rounded to 8 chars!!!! Do not remove. Using substring(0,8) not (0,9) here so there is room for + - % etc onscreen without text overspill
+        num1 =  String(displayValue).substring(0,8);
+        //convert back to number after chopping off the string so that accidental concatenation with the PLUS does not happen when adding a chopped off long decimal number!
+        num1 = Number(num1);
+        // very important to convert back to number... verify in console.
+        // console.log(typeof num1);
+        //grab current operator to evaluate the next expression (also thinking I can remove this one)
+        operator = operatorTemp; 
+        num2 = false;
+        updateDisplay();
+        if (operatorTemp !== 'equals'){ 
+            // update display to include the next inputted symbol after expression evaluation! The sequence of pressing "6 - 2 -" will display "4 -" rather than just "4"
+            displayPara.textContent = `${num1} ${operatorSymbol}`;
+        }
     }
-    console.log(`${num1} ${operatorSymbol} ${num2}`);
-    console.log(runningList);
 }
-
-}
-
-
-// test the six basic operator functions (no longer work because a aspercentage and plusminus functions depend on the running list (related to currentdisplay) rather than user input)
-// addNumbers returns 4
-// console.log(addNumbers(2,2));
-// // subtractNumbers returns 0
-// console.log(subtractNumbers(2,2));
-// // multiplyNumbers returns 4
-// console.log(multiplyNumbers(2,2));
-// // divideNumbers returns 1
-// console.log(divideNumbers(2,0));
-// // plusMinus returns -2
-// console.log(plusMinus(2));
-// // asPercentage returns 0.02
-// console.log(asPercentage(2));
-
-// //testing the operate function (6 tests)
-// console.log('TESTING THE OPERATE FUNCTION (6 mini-functions inside)')
-// // returns 4
-// console.log(operate(2, '+', 2));
-// // returns 0
-// console.log(operate(2, '-', 2));
-// // returns 4
-// console.log(operate(2, '*', 2));
-// // returns 1
-// console.log(operate(2, '/', 2));
-// // returns -2
-// console.log(operate(2, '+/-'));
-// // returns 0.02
-// console.log(operate(2, '%'));
